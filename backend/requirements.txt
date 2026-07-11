@@ -9,3 +9,6 @@ llama-index-vector-stores-chroma
 llama-index-llms-openai
 llama-index-embeddings-openai
 pymupdf
+google-genai
+llama-index-llms-google-genai
+llama-index-embeddings-google-genai

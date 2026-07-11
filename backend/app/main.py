@@ -25,10 +25,19 @@ os.makedirs(UPLOAD_DIR, exist_ok=True)
 app.mount("/files", StaticFiles(directory=UPLOAD_DIR), name="files")
 
 
+# Configure CORS origins
+allowed_origins_str = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000")
+allowed_origins = [origin.strip() for origin in allowed_origins_str.split(",") if origin.strip()]
+
+# Wildcard '*' requires allow_credentials=False in CORS
+allow_credentials = True
+if "*" in allowed_origins:
+    allow_credentials = False
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
-    allow_credentials=True,
+    allow_origins=allowed_origins,
+    allow_credentials=allow_credentials,
     allow_methods=["*"],
     allow_headers=["*"],
 )
